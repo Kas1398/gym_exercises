@@ -5,7 +5,7 @@ import Detail from '../components/Detail';
 import ExerciseVideos from '../components/ExerciseVideos';
 import SimilarExercises from '../components/ExerciseVideos';
 
-import { exerciseOptions, fetchData } from '../utils/fetchData';
+import { exerciseOptions, fetchData, youtubeOptions } from '../utils/fetchData';
 
 const ExerciseDetail = () => {
     const [exerciseDetail, setExerciseDetail] = useState({});
@@ -24,8 +24,8 @@ const ExerciseDetail = () => {
             const exerciseDetailData = await fetchData(`${exerciseDbUrl}/exercises/exercise/${id}`, exerciseOptions);
             setExerciseDetail(exerciseDetailData);
 
-            //const exerciseVideosData = await fetchData(`${youtubeSearchUrl}/search?query=${exerciseDetailData.name} exercise`, youtubeOptions);
-            // setExerciseVideos(exerciseVideosData.contents);
+            const exerciseVideosData = await fetchData(`${youtubeSearchUrl}/search?query=${exerciseDetailData.name} exercise`, youtubeOptions);
+            setExerciseVideos(exerciseVideosData.contents);
 
             const targetMuscleExercisesData = await fetchData(`${exerciseDbUrl}/exercises/target/${exerciseDetailData.target}`, exerciseOptions);
             setTargetMuscleExercises(targetMuscleExercisesData);
