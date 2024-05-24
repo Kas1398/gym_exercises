@@ -27,7 +27,7 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
     }, [bodyPart]);
 
     // Pagination
-    const indexOfLastExercise = currentPage * exercisesPerPage;
+    /*const indexOfLastExercise = currentPage * exercisesPerPage;
     const indexOfFirstExercise = indexOfLastExercise - exercisesPerPage;
     const currentExercises = exercises.slice(indexOfFirstExercise, indexOfLastExercise);
 
@@ -37,7 +37,24 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
         window.scrollTo({ top: 1800, behavior: 'smooth' });
     };
 
+    if (!currentExercises.length) return <Loader />;*/
+
+    // Pagination
+    let currentExercises = [];
+    if (exercises && Array.isArray(exercises)) {
+        const indexOfLastExercise = currentPage * exercisesPerPage;
+        const indexOfFirstExercise = indexOfLastExercise - exercisesPerPage;
+        currentExercises = exercises.slice(indexOfFirstExercise, indexOfLastExercise);
+    }
+
+    const paginate = (event, value) => {
+        setCurrentPage(value);
+
+        window.scrollTo({ top: 1800, behavior: 'smooth' });
+    };
+
     if (!currentExercises.length) return <Loader />;
+
 
     return (
         <Box id="exercises" sx={{ mt: { lg: '109px' } }} mt="50px" p="20px">
